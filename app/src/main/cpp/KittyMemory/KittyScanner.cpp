@@ -13,7 +13,9 @@ namespace KittyScanner {
 
     uintptr_t find_from_lib(const char *libName, const char *pattern, const char *mask) {
         ProcMap libMap;
-        if (!KittyMemory::getLibraryMap(libName, libMap)) return 0;
+        libMap = KittyMemory::getLibraryMap(libName);
+        if (!libMap.isValid()) return 0;
+
 
         uintptr_t start = libMap.startAddress;
         uintptr_t end = libMap.endAddress;

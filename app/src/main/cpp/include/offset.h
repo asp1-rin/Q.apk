@@ -1,25 +1,22 @@
 #ifndef OFFSETS_H
 #define OFFSETS_H
-#include "KittyMemory/KittyInclude.hpp"
 
-// 게임 라이브러리 이름
+// Base Addresses
 #define G_LIB "libMyGame.so"
 #define S_LIB "libxigncode.so"
 
-struct Offsets {
-    // Bypass (심볼 또는 패턴)
-    const char* sym_notify = "ZCWAVE_Notify";
-    
-    // Weapon (xaOffset)
-    uintptr_t no_recoil = 0x33BFAF0;
-    uintptr_t no_spread = 0x35ADC9C;
-    
-    // Aimbot (eposOffset)
-    uintptr_t player_base = 0x7ABE28;
-    uintptr_t posX = 0x190;
-    uintptr_t posY = 0x194;
-    uintptr_t posZ = 0x198;
-};
+#define ADDR_POSITION_BASE 0x7ABE28
+#define ADDR_CASH_BASE     0x2D16FC
+#define ADDR_CAMERA_BASE   0x8B26DC
 
-extern Offsets offsets;
+// Player / Enemy Offsets (_eposOffset)
+#define OFF_HP         0x2C
+#define OFF_MAXHP      0xEF4
+#define OFF_NICKNAME   0x88
+#define OFF_STATE      0x12C
+#define OFF_X          0x190
+#define OFF_Y          0x194
+#define OFF_Z          0x198
+#define OFF_SKILL_COOL 0xCC
+
 #endif

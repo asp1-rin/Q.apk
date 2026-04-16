@@ -4,6 +4,7 @@ plugins {
 }
 
 android {
+    // 프로젝트의 고유 패키지 명칭
     namespace 'com.internal.asp1rin.launcher'
     compileSdk 33
 
@@ -14,9 +15,11 @@ android {
         versionCode 1
         versionName "1.0"
 
+        // C++ 빌드 설정 (CMake)
         externalNativeBuild {
             cmake {
                 cppFlags "-std=c++11"
+                // 필요한 경우 여기에 아키텍처 설정 추가 가능 (예: abiFilters "armeabi-v7a", "arm64-v8a")
             }
         }
     }
@@ -28,6 +31,7 @@ android {
         }
     }
 
+    // CMakeLists.txt 파일의 경로 지정
     externalNativeBuild {
         cmake {
             path "src/main/cpp/CMakeLists.txt"
@@ -38,13 +42,16 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
+    
     kotlinOptions {
         jvmTarget = '17'
     }
 }
 
 dependencies {
+    // 안드로이드 기본 라이브러리 (최신 안정 버전)
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 }

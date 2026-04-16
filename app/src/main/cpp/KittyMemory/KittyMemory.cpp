@@ -1,4 +1,5 @@
 #include "KittyMemory.hpp"
+#include "MemoryPatch.hpp"
 #include <fstream>
 #include <sstream>
 #include <sys/mman.h>
@@ -6,10 +7,12 @@
 #include <unistd.h>
 
 namespace KittyMemory {
+
     ProcMap getLibraryMap(const char *libName) {
         ProcMap m;
         m.startAddress = 0;
         m.endAddress = 0;
+        m.length = 0;
         char line[512];
         FILE *f = fopen("/proc/self/maps", "r");
         if (!f) return m;
@@ -29,7 +32,6 @@ namespace KittyMemory {
         return m;
     }
 
-    // MemoryPatch 구현부 추가
     MemoryPatch MemoryPatch::buildPatch(const char* libName, uintptr_t offset, const char* patchCode, size_t patchSize) {
         MemoryPatch patch;
         ProcMap map = getLibraryMap(libName);
@@ -38,7 +40,6 @@ namespace KittyMemory {
             patch._size = patchSize;
             patch._patchBytes.assign(patchCode, patchCode + patchSize);
             
-            // 원본 데이터 보관
             patch._origBytes.resize(patchSize);
             memcpy(patch._origBytes.data(), (void*)patch._address, patchSize);
         }
@@ -61,9 +62,16 @@ namespace KittyMemory {
         return true;
     }
 
+    bool write64(uintptr_t address, uint64_t value) {
+        mprotect((void *)(address & ~0xFFF), 0x1000 * 2, PROT_READ | PROT_WRITE | PROT_EXEC);
+        *(uint64_t *)address = value;
+        return true;
+    }
+
     bool write32(uintptr_t address, uint32_t value) {
         mprotect((void *)(address & ~0xFFF), 0x1000 * 2, PROT_READ | PROT_WRITE | PROT_EXEC);
         *(uint32_t *)address = value;
         return true;
     }
 }
+

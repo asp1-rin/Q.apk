@@ -3,17 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp"
-    android:background="#121212">
+    android:background="#121212"
+    android:padding="20dp">
 
     <ImageView
-        android:id="@+id/imgLogo"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
-        android:src="@drawable/q_logo" />
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:src="@drawable/q_logo"
+        android:layout_marginBottom="30dp"/>
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/swNoRecoil"
@@ -21,7 +19,7 @@
         android:layout_height="wrap_content"
         android:text="No Recoil"
         android:textColor="#FFFFFF"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="10dp"/>
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/swNoSpread"
@@ -29,28 +27,12 @@
         android:layout_height="wrap_content"
         android:text="No Spread"
         android:textColor="#FFFFFF"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="10dp"/>
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/swAimbot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Aimbot"
-        android:textColor="#FFFFFF"
-        android:layout_marginBottom="10dp"/>
-
-    <TextView
-        android:id="@+id/txtFovStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Aimbot FOV: 20"
-        android:textColor="#AAAAAA"/>
-
-    <SeekBar
-        android:id="@+id/sbAimbotFov"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:max="100"
-        android:progress="20"/>
-
+        android:textColor="#FFFFFF"/>
 </LinearLayout>

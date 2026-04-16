@@ -1,11 +1,7 @@
-#ifndef KITTYMEMORY_H
-#define KITTYMEMORY_H
-
-#include <string>
-#include <vector>
+#include "KittyMemory.h"
 
 namespace KittyMemory {
-    std::string getVersion();
+    std::string getVersion() {
+        return "KittyMemory v1.0 - Ready";
+    }
 }
-
-#endif

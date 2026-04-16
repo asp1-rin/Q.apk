@@ -9,14 +9,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4 # 최신버전으로 업그레이드
-      with:
-        submodules: false
+    - uses: actions/checkout@v4
 
-    - name: set up JDK 17 # 최근 안드로이드 빌드 표준인 17로 상향
+    - name: set up JDK 11 # Gradle 7.5에 최적화된 Java 11로 변경
       uses: actions/setup-java@v4
       with:
-        java-version: '17'
+        java-version: '11'
         distribution: 'temurin'
         cache: gradle
 
@@ -25,24 +23,25 @@ jobs:
         mkdir -p app/src/main/res/mipmap-xxxhdpi
         cp Q.PNG app/src/main/res/mipmap-xxxhdpi/ic_launcher.png || echo "No Q.PNG found"
 
-    # NDK 설정을 더 안정적인 공식 방식으로 변경
     - name: Setup Android NDK
       uses: android-actions/setup-android@v3
       
     - name: Install NDK
-      run: sdkmanager "ndk;25.2.9519653" # r25c 버전에 해당하는 정식 빌드 번호
+      run: sdkmanager "ndk;25.2.9519653"
+
+    # 이 부분이 핵심입니다: 특정 Gradle 버전 강제 지정
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2
+      with:
+        gradle-version: 7.5
 
     - name: Build with Gradle
       run: |
-        # gradlew가 없으면 생성하고 권한 부여
-        if [ ! -f "gradlew" ]; then
-          gradle wrapper
-        fi
         chmod +x gradlew
-        ./gradlew assembleDebug
+        ./gradlew assembleDebug --stacktrace
 
     - name: Upload APK
-      uses: actions/upload-artifact@v4 # 에러 원인인 v3를 v4로 수정
+      uses: actions/upload-artifact@v4
       with:
         name: ASP1RIN-ADMIN-DEBUG
         path: app/build/outputs/apk/debug/app-debug.apk

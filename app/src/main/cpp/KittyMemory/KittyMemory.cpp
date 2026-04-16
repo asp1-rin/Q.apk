@@ -1,6 +1,7 @@
-#include "KittyMemory.hpp"
+#include "KittyMemory.h"
 #include <fstream>
 #include <sstream>
+#include <sys/mman.h>
 
 namespace KittyMemory {
     ProcMap getLibraryMap(const char *libName) {

@@ -1,4 +1,5 @@
 #include "KittyScanner.hpp"
+#include <sys/mman.h>
 
 namespace KittyScanner {
 

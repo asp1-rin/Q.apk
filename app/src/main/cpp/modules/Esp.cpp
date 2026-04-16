@@ -1,4 +1,4 @@
-#include "offsets.h"
+#include "offset.h"
 #include "KittyInclude.hpp"
 
 // 적 정보를 담을 구조체 (제공된 오프셋 반영)

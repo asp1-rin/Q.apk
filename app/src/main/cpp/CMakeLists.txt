@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10.2)
-
+project("Q-lib")
 # 하위 폴더 연결
 add_subdirectory(KittyMemory)
 

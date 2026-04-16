@@ -4,26 +4,23 @@ plugins {
 }
 
 android {
-    // 프로젝트의 고유 패키지 명칭
     namespace 'com.internal.asp1rin.launcher'
     compileSdk 33
 
-        defaultConfig {
+    defaultConfig {
         applicationId "com.internal.asp1rin.launcher"
-        minSdk 21
+        minSdk 24
         targetSdk 33
         versionCode 1
         versionName "1.0"
 
         externalNativeBuild {
             cmake {
-                cppFlags "-std=c++11"
-                // 빌드 대상을 지정하여 에러 방지
-                abiFilters "armeabi-v7a", "arm64-v8a"
+                cppFlags "-std=c++17"
+                arguments "-DANDROID_STL=c++_shared"
             }
         }
     }
-
 
     buildTypes {
         release {
@@ -32,10 +29,10 @@ android {
         }
     }
 
-    // CMakeLists.txt 파일의 경로 지정
     externalNativeBuild {
         cmake {
-            path "src/main/cpp/CMakeLists.txt"
+            path file('src/main/cpp/CMakeLists.txt')
+            version '3.22.1'
         }
     }
 
@@ -43,16 +40,15 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
-    
+
     kotlinOptions {
         jvmTarget = '17'
     }
 }
 
 dependencies {
-    // 안드로이드 기본 라이브러리 (최신 안정 버전)
-    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 }

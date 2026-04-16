@@ -1,4 +1,4 @@
-#include "offsets.h"
+#include "offset.h"
 #include "KittyInclude.hpp"
 
 // 패치 객체들을 전역으로 선언하여 상태 유지

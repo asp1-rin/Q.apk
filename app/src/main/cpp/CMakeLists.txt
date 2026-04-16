@@ -3,10 +3,11 @@ project(QModule)
 
 add_subdirectory(KittyMemory)
 
+# 경로 설정 최적화 (src/main/cpp 중복 제거)
 include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/main/cpp/include
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/main/cpp/modules
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/main/cpp/KittyMemory
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/modules
+    ${CMAKE_CURRENT_SOURCE_DIR}/KittyMemory
 )
 
 add_library(BypassModule SHARED

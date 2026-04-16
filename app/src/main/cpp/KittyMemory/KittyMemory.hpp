@@ -13,13 +13,25 @@ struct ProcMap {
     bool isValid() const { return startAddress != 0 && endAddress != 0; }
 };
 
+
 namespace KittyMemory {
-    // 라이브러리 주소 찾기
     ProcMap getLibraryMap(const char *libName);
-    
-    // 메모리에 데이터 쓰기 (권한 자동 처리)
     bool write64(uintptr_t address, uint64_t value);
     bool write32(uintptr_t address, uint32_t value);
+
+
+    class MemoryPatch {
+    public:
+        MemoryPatch() : _address(0), _size(0) {}
+        static MemoryPatch buildPatch(const char* libName, uintptr_t offset, const char* patchCode, size_t patchSize);
+        bool modify();
+        bool restore();
+    private:
+        uintptr_t _address;
+        size_t _size;
+        std::vector<char> _origBytes;
+        std::vector<char> _patchBytes;
+    };
 }
 
 #endif

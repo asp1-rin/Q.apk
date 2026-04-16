@@ -10,18 +10,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+      with:
+        fetch-depth: 1 # 빌드 속도 향상을 위해 히스토리 제한
 
     - name: set up JDK 17
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
-        cache: gradle
-
-    - name: Setup App Icon
-      run: |
-        mkdir -p app/src/main/res/mipmap-xxxhdpi
-        cp Q.PNG app/src/main/res/mipmap-xxxhdpi/ic_launcher.png || echo "No Q.PNG found"
 
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
@@ -29,15 +25,18 @@ jobs:
     - name: Install NDK
       run: sdkmanager "ndk;25.2.9519653"
 
-    # --- 서버의 Gradle을 무시하고 7.5 버전을 강제로 세팅 ---
     - name: Setup Gradle 7.5
       uses: gradle/gradle-build-action@v3
       with:
         gradle-version: 7.5
+        # 빌드 캐시 충돌 방지
+        cache-read-only: false
 
     - name: Build with Gradle
-      run: gradle assembleDebug --stacktrace # ./gradlew 대신 직접 gradle 호출
-    # --------------------------------------------------
+      # 메모리 제한 옵션과 상세 로그 추가
+      run: |
+        chmod +x gradlew
+        ./gradlew assembleDebug --no-daemon --stacktrace -Dorg.gradle.jvmargs="-Xmx2048m -XX:MaxMetaspaceSize=512m"
 
     - name: Upload APK
       uses: actions/upload-artifact@v4

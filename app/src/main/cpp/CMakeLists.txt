@@ -3,7 +3,11 @@ project(QModule)
 
 add_subdirectory(KittyMemory)
 
-include_directories(include modules KittyMemory)
+include_directories(
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/main/cpp/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/main/cpp/modules
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/main/cpp/KittyMemory
+)
 
 add_library(BypassModule SHARED
             main.cpp

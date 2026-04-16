@@ -1,4 +1,4 @@
-#include "KittyMemory.h"
+#include "KittyMemory.hpp"
 #include <fstream>
 #include <sstream>
 #include <sys/mman.h>

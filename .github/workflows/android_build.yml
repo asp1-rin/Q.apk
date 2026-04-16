@@ -23,21 +23,15 @@ jobs:
     - name: Install NDK
       run: sdkmanager "ndk;25.2.9519653"
 
-    # --- [중요] KittyMemory 파일 강제 생성 단계 추가 ---
-    - name: Restore Missing KittyMemory Files
-      run: |
-        mkdir -p app/src/main/cpp/KittyMemory
-        echo '#ifndef KITTYMEMORY_H' > app/src/main/cpp/KittyMemory/KittyMemory.h
-        echo '#define KITTYMEMORY_H' >> app/src/main/cpp/KittyMemory/KittyMemory.h
-        echo '#include <string>' >> app/src/main/cpp/KittyMemory/KittyMemory.h
-        echo 'namespace KittyMemory { std::string getVersion(); }' >> app/src/main/cpp/KittyMemory/KittyMemory.h
-        echo '#endif' >> app/src/main/cpp/KittyMemory/KittyMemory.h
-        
-        echo '#include "KittyMemory.h"' > app/src/main/cpp/KittyMemory/KittyMemory.cpp
-        echo 'namespace KittyMemory { std::string getVersion() { return "v1"; } }' >> app/src/main/cpp/KittyMemory/KittyMemory.cpp
-        
-        echo "Files generated successfully:"
-        ls -R app/src/main/cpp/KittyMemory/
+    # --- 이제 실제 소스코드를 사용하므로, 강제 생성 단계는 주석 처리합니다 ---
+    # - name: Restore Missing KittyMemory Files
+    #   run: |
+    #     mkdir -p app/src/main/cpp/KittyMemory
+    #     echo -e '#ifndef KITTYMEMORY_H\n#define KITTYMEMORY_H\n#include <string>\nnamespace KittyMemory { std::string getVersion(); }\n#endif' > app/src/main/cpp/KittyMemory/KittyMemory.h
+    #     echo -e '#include "KittyMemory.h"\nnamespace KittyMemory { std::string getVersion() { return "v1"; } }' > app/src/main/cpp/KittyMemory/KittyMemory.cpp
+    #     echo "Files generated successfully:"
+    #     ls -R app/src/main/cpp/KittyMemory/
+    # -----------------------------------------------------------------
 
     - name: Setup Gradle 7.5 and Generate Wrapper
       uses: gradle/gradle-build-action@v3
@@ -46,6 +40,7 @@ jobs:
 
     - name: Build with Gradle
       run: |
+        # gradlew 생성 및 실행 권한 부여
         gradle wrapper --gradle-version 7.5
         chmod +x gradlew
         ./gradlew assembleDebug --stacktrace

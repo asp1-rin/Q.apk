@@ -1,5 +1,3 @@
 <resources>
-    <style name="Theme.AdminLauncher" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">#FF0000</item>
-    </style>
+    <style name="Theme.AppCompat.Light.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar" />
 </resources>

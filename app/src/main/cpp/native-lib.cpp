@@ -16,7 +16,7 @@ void* hack_thread(void*) {
         usleep(500000);
     } while (!gMap.isValid());
 
-    // 0x123456 같은 주소값은 추후 실제 분석값으로 수정
+    // 0x123456 같은 주소값은 추후 실제 분석값으로 수정 예정
     recoilPatch = MemoryPatch::createWithHex("libMyGame.so", 0x123456, "00 00 A0 E3 1E FF 2F E1");
     spreadPatch = MemoryPatch::createWithHex("libMyGame.so", 0x654321, "00 00 A0 E3 1E FF 2F E1");
     return nullptr;

@@ -2,8 +2,8 @@
 #include "KittyInclude.hpp"
 
 // 패치 객체들을 전역으로 선언하여 상태 유지
-KittyMemory::MemoryPatch recoilPatch;
-KittyMemory::MemoryPatch spreadPatch;
+recoilPatch = KittyMemory::MemoryPatch::buildPatch(G_LIB, 0x33BFAF0, "\x00\x40\x20\x1E", 4);
+spreadPatch = KittyMemory::MemoryPatch::buildPatch(G_LIB, 0x35ADC9C, "\x00\x40\x20\x1E", 4);
 
 // 초기 설정: 게임 라이브러리 로드 후 주소와 패치값 준비
 void SetupWeapon() {

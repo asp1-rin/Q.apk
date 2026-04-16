@@ -2,8 +2,8 @@
 #include <string>
 #include <unistd.h>
 #include <pthread.h>
-#include "KittyMemory/KittyMemory.h"
-#include "KittyMemory/MemoryPatch.h"
+#include "KittyMemory/KittyMemory.hpp"
+#include "KittyMemory/MemoryPatch.hpp"
 
 bool is_authorized = false;
 MemoryPatch recoilPatch, spreadPatch;

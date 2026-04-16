@@ -5,9 +5,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        // 안드로이드 빌드 도구 버전 설정
         classpath 'com.android.tools.build:gradle:7.4.2'
-        // 코틀린 플러그인 설정
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0"
     }
 }
@@ -17,8 +15,4 @@ allprojects {
         google()
         mavenCentral()
     }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
 }

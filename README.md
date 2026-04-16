@@ -1,52 +1,50 @@
-# ASP1RIN ADMIN: Native Security Launcher
+# Q.apk - Android Native Bypass & Hack Module
 
-본 프로젝트는 고도의 보안이 요구되는 **관리자 전용 안드로이드 런처 및 네이티브 메모리 패치 엔진**입니다. 텅 빈 바닥 상태에서부터 정교한 C++ 엔진과 Kotlin UI를 결합하여 구축되었습니다.
-
----
-
-## (Core Features)
-
-### 1. 관리자 전용 인증 시스템
-시스템 보안을 위해 사전 등록된 **6인의 관리자**만이 앱 기능을 활성화할 수 있습니다.
-* **Access List**: ******
-
-### 2. 네이티브 메모리 패치 엔진
-`MJx0`의 `KittyMemory` 라이브러리를 기반으로 설계되어, 게임 프로세스의 메모리를 실시간으로 수정합니다.
-* **Memory Patching**: `libMyGame.so` 라이브러리를 타겟팅하여 무반동(Recoil) 및 탄퍼짐(Spread) 방지 기능을 수행합니다.
-* **Safe Injection**: 커스텀 JNI 계층을 통해 Java/Kotlin 레이어와 통신하며 보안성을 강화했습니다.
-
-### 3. 실시간 제어 UI
-로그인 성공 시에만 노출되는 대시보드를 통해 기능을 즉각적으로 ON/OFF 할 수 있습니다.
+A high-performance Android native modification tool developed in C++ using the **KittyMemory** library. This project demonstrates advanced memory patching, pattern scanning, and bypass techniques for mobile gaming security systems (e.g., Xigncode).
 
 ---
 
-## (Tech Stack)
+## Features
 
-| 구분 | 기술 / 라이브러리 |
-| :--- | :--- |
-| **언어** | Kotlin (Frontend), C++11 (Backend) |
-| **엔진** | KittyMemory (by MJx0) |
-| **빌드 도구** | CMake, Gradle, Android NDK |
-| **아키텍처** | JNI (Java Native Interface) |
-
----
-
-## (Architecture)
-
-* `app/build.gradle`: NDK 및 프로젝트 빌드 핵심 설정
-* `app/src/main/cpp/`: 
-    * `native-lib.cpp`: 메인 로직 및 패치 엔진
-    * `CMakeLists.txt`: C++ 컴파일 가이드
-    * `KittyMemory/`: 메모리 조작 라이브러리 소스
-* `app/src/main/java/`: 관리자 인증 및 인터페이스 로직 (`MainActivity.kt`)
+* **Real-time Memory Patching**: Dynamically modify game instructions to enable features like No Recoil and No Spread.
+* **Advanced Pattern Scanning**: Locate function addresses in memory using IDA-style patterns and symbol names.
+* **Security Bypass**: Integrated logic to bypass integrity checks and security modules.
+* **Real-time Ranking System**: High-performance logging system that tracks and displays the top 10 players based on RP (Rank Points).
+* **Cross-Platform Core**: C++ backend optimized for `arm64-v8a` architecture.
 
 ---
 
-## ⚠️ 개발자 주의사항 (Notice)
+## Technical Stack
 
-1. **좌표 업데이트**: 현재 `native-lib.cpp`에 포함된 주소값(Offsets)은 예시용 더미 데이터입니다. 실제 운영 시 분석된 최신 좌표값으로 수정이 필요합니다.
-2. **확장자 준수**: `KittyMemory`의 최신 규격에 따라 모든 헤더는 `.hpp` 확장자를 참조합니다.
-3. **권한**: 오버레이 창이나 메모리 접근을 위해 안드로이드 권한 설정이 필요할 수 있습니다.
+* **Language**: C++ 17, Kotlin (for Android UI/Launcher)
+* **Build System**: CMake, Gradle 8.0
+* **NDK Version**: 25.1.8937393
+* **Libraries**: 
+    * [KittyMemory](https://github.com/MJ007/KittyMemory) - Used for runtime memory patching and memory maps.
+    * **KittyScanner** - Custom implementation for symbol and pattern searching.
 
 ---
-**© 2026 ASP1RIN. All Rights Reserved.**
+
+## Project Structure
+
+* `app/src/main/cpp/`
+    * `main.cpp`: Entry point for the native module and JNI bridge.
+    * `modules/`: Contains specific hack logic (`Weapon.cpp`, `Aimbot.cpp`, `Esp.cpp`, `Bypass.cpp`).
+    * `KittyMemory/`: Core memory manipulation utility.
+    * `include/`: Header files and memory offsets (`offset.h`).
+* `app/src/main/kotlin/`: Android launcher implementation.
+
+---
+
+## Build Instructions
+
+This project is configured for automated builds via GitHub Actions or local Android Studio environments.
+
+### Prerequisites
+* Android SDK & NDK (v25.1+)
+* CMake 3.22.1
+* Gradle 8.0
+
+### Local Build
+```bash
+./gradlew assembleDebug

@@ -1,50 +1,26 @@
-# Q.apk - Android Native Bypass & Hack Module
+# Q.apk: Native Memory Patching Demonstration
 
-A high-performance Android native modification tool developed in C++ using the **KittyMemory** library. This project demonstrates advanced memory patching, pattern scanning, and bypass techniques for mobile gaming security systems (e.g., Xigncode).
+Q.apk is a Native Modding example project that directly modifies the runtime memory of Android games using the KittyMemory library.
 
----
-
-## Features
-
-* **Real-time Memory Patching**: Dynamically modify game instructions to enable features like No Recoil and No Spread.
-* **Advanced Pattern Scanning**: Locate function addresses in memory using IDA-style patterns and symbol names.
-* **Security Bypass**: Integrated logic to bypass integrity checks and security modules.
-* **Real-time Ranking System**: High-performance logging system that tracks and displays the top 10 players based on RP (Rank Points).
-* **Cross-Platform Core**: C++ backend optimized for `arm64-v8a` architecture.
-
----
-
-## Technical Stack
-
-* **Language**: C++ 17, Kotlin (for Android UI/Launcher)
-* **Build System**: CMake, Gradle 8.0
-* **NDK Version**: 25.1.8937393
-* **Libraries**: 
-    * [KittyMemory](https://github.com/MJ007/KittyMemory) - Used for runtime memory patching and memory maps.
-    * **KittyScanner** - Custom implementation for symbol and pattern searching.
-
----
+## Key Features
+- Library: KittyMemory (Memory Patching Tool)
+- Method: Runtime Memory Patching & Offset Manipulation
+- Implemented Modules:
+    - Silent Aimbot: Forcing write operations on angle data within memory.
+    - Wallhack/ESP: Visualizing entities by modifying rendering pipeline data.
+    - Weapon Stabilization: Patching spread and recoil offsets using KittyMemory.
 
 ## Project Structure
-
-* `app/src/main/cpp/`
-    * `main.cpp`: Entry point for the native module and JNI bridge.
-    * `modules/`: Contains specific hack logic (`Weapon.cpp`, `Aimbot.cpp`, `Esp.cpp`, `Bypass.cpp`).
-    * `KittyMemory/`: Core memory manipulation utility.
-    * `include/`: Header files and memory offsets (`offset.h`).
-* `app/src/main/kotlin/`: Android launcher implementation.
-
----
+- /jni: C++ source code based on KittyMemory.
+- /src: Java/Kotlin code for UI and service management.
+- /includes: Definitions for offsets and memory structures.
 
 ## Build Instructions
+1. Install Android Studio.
+2. Configure NDK (Native Development Kit).
+3. Generate .so files and build via ndk-build or CMake.
 
-This project is configured for automated builds via GitHub Actions or local Android Studio environments.
+## Disclaimer
+This project is an open-source learning resource intended to help understand the memory structure of the Android OS. Unauthorized or malicious use is strongly discouraged.
 
-### Prerequisites
-* Android SDK & NDK (v25.1+)
-* CMake 3.22.1
-* Gradle 8.0
-
-### Local Build
-```bash
-./gradlew assembleDebug
+## made by asp1-rin

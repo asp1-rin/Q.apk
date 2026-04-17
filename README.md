@@ -23,4 +23,4 @@ Q.apk is a Native Modding example project that directly modifies the runtime mem
 ## Disclaimer
 This project is an open-source learning resource intended to help understand the memory structure of the Android OS. Unauthorized or malicious use is strongly discouraged.
 
-## made by asp1-rin
+**made by asp1-rin**
